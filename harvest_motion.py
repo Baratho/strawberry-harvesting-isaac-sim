@@ -29,22 +29,17 @@ from isaacsim.robot_motion.motion_generation import (
 from isaacsim.robot_motion.motion_generation.lula import RRT
 
 
-# ============================================================
-# 参数
-# ============================================================
 
 FRUIT_POSITION = np.array(
     [0.55, 0.00, 0.50],
     dtype=float,
 )
 
-# 直径 6 cm，可以放入 Franka 最大约 8 cm 的夹爪开口
+
 FRUIT_RADIUS = 0.030
 
-# RRT 先移动到距离草莓 8 cm 的近抓取点
 NEAR_GRASP_DISTANCE = 0.08
 
-# 前一步中通过 IK 的候选方向
 CANDIDATE_ANGLES = [
     0,
     30,
@@ -54,8 +49,7 @@ CANDIDATE_ANGLES = [
     -90,
 ]
 
-# 远离植物的安全初始姿态
-# 前 7 个为手臂关节，后 2 个为手指关节
+
 SAFE_HOME_JOINTS = np.array(
     [
         1.20,
@@ -76,7 +70,7 @@ GRIPPER_OPEN = np.array(
     dtype=float,
 )
 
-# 逻辑抓取时夹爪闭合到该位置
+
 GRIPPER_CLOSED = np.array(
     [0.025, 0.025],
     dtype=float,
@@ -92,22 +86,20 @@ BLUE = np.array([0.10, 0.35, 1.00])
 SOIL = np.array([0.48, 0.30, 0.12])
 
 
-# ============================================================
-# 数学工具
-# ============================================================
+
 
 def normalize(vector):
     length = np.linalg.norm(vector)
 
     if length < 1.0e-8:
-        raise ValueError("不能归一化零向量")
+        raise ValueError("cannot nom")
 
     return vector / length
 
 
 def rotation_matrix_to_quaternion(rotation):
     """
-    3x3 旋转矩阵转换为 Isaac Sim 四元数：
+    3x3 to Isaac Sim 4：
     [w, x, y, z]
     """
     m = rotation
@@ -161,8 +153,7 @@ def rotation_matrix_to_quaternion(rotation):
 
 def make_grasp_orientation(approach_direction):
     """
-    让 right_gripper 的局部 +Z 轴指向草莓，
-    同时让夹爪保持直立。
+    gripper, vertical to z axis of stra
     """
     z_axis = normalize(approach_direction)
     world_up = np.array([0.0, 0.0, 1.0])
@@ -191,7 +182,7 @@ def make_grasp_orientation(approach_direction):
 def make_candidate(angle_degrees):
     angle_radians = np.deg2rad(angle_degrees)
 
-    # 从夹爪指向草莓的接近方向
+    # approach direction
     approach_direction = np.array(
         [
             np.cos(angle_radians),
@@ -219,9 +210,6 @@ def make_candidate(angle_degrees):
     }
 
 
-# ============================================================
-# 控制辅助函数
-# ============================================================
 
 def apply_gripper_target(target_positions):
     franka.gripper.apply_action(
@@ -240,12 +228,7 @@ def hold_arm_action(
     frames,
     carry_strawberry=False,
 ):
-    """
-    保持一个手臂动作若干帧，并保持夹爪位置。
-
-    carry_strawberry=True 时，把草莓更新到夹爪中心，
-    实现逻辑附着。
-    """
+    
     for _ in range(frames):
         if not simulation_app.is_running():
             return
@@ -261,7 +244,7 @@ def hold_arm_action(
 
 def update_attached_strawberry():
     """
-    将草莓中心放到 right_gripper 坐标系中心。
+    put target to gripper center
     """
     ee_position, _ = (
         articulation_ik_solver
@@ -273,9 +256,6 @@ def update_attached_strawberry():
     )
 
 
-# ============================================================
-# 创建候选
-# ============================================================
 
 candidate_goals = [
     make_candidate(angle)
@@ -283,9 +263,6 @@ candidate_goals = [
 ]
 
 
-# ============================================================
-# 创建世界
-# ============================================================
 
 world = World(
     stage_units_in_meters=1.0,
@@ -296,9 +273,7 @@ world = World(
 world.scene.add_default_ground_plane()
 
 
-# ============================================================
-# 创建 Franka
-# ============================================================
+
 
 franka = world.scene.add(
     Franka(
@@ -309,9 +284,7 @@ franka = world.scene.add(
 )
 
 
-# ============================================================
-# 创建植物场景
-# ============================================================
+
 
 plant_base = world.scene.add(
     FixedCuboid(
@@ -335,8 +308,7 @@ stem = world.scene.add(
     )
 )
 
-# 使用 VisualSphere：
-# 当前阶段用逻辑附着模拟果梗断裂和抓取保持
+
 target_strawberry = world.scene.add(
     VisualSphere(
         prim_path="/World/Plant/TargetStrawberry",
@@ -380,15 +352,12 @@ neighbor_fruit = world.scene.add(
 )
 
 
-# ============================================================
-# 初始化仿真和安全初始姿态
-# ============================================================
 
 world.reset()
 
 print()
 print("=" * 76)
-print("PHASE 1：设置安全初始姿态")
+print("PHASE 1：initial")
 
 franka.set_joint_positions(
     SAFE_HOME_JOINTS
@@ -408,7 +377,7 @@ for _ in range(120):
     world.step(render=True)
 
 print(
-    "当前关节位置：",
+    "current position：",
     np.round(
         franka.get_joint_positions(),
         4,
@@ -417,7 +386,7 @@ print(
 
 
 # ============================================================
-# 初始化 Lula IK
+#  Lula IK
 # ============================================================
 
 kinematics_config = (
@@ -450,11 +419,10 @@ lula_ik_solver.set_robot_base_pose(
 
 
 # ============================================================
-# 初始化 RRT
+#  RRT
 # ============================================================
 
-print("=" * 76)
-print("PHASE 2：加载 Lula RRT")
+
 
 rrt_config = (
     interface_config_loader
@@ -487,7 +455,7 @@ for obstacle in planning_obstacles:
     )
 
     print(
-        f"添加障碍物 {obstacle.name}: "
+        f" {obstacle.name}: "
         f"{'SUCCESS' if success else 'FAILED'}"
     )
 
@@ -500,11 +468,11 @@ rrt.update_world()
 
 
 # ============================================================
-# 为候选近抓取位姿搜索 RRT
+# search RRT
 # ============================================================
 
 print("=" * 76)
-print("PHASE 3：搜索到近抓取点的完整路径")
+print("PHASE 3：search the route")
 print("=" * 76)
 
 selected_candidate = None
@@ -522,7 +490,7 @@ for candidate in candidate_goals:
         f"检查 angle={candidate['angle']} deg"
     )
     print(
-        "近抓取位置：",
+        "near the position：",
         np.round(
             candidate["near_position"],
             4,
@@ -553,31 +521,29 @@ for candidate in candidate_goals:
 
             print("  RRT PATH FOUND")
             print(
-                f"  动作数量：{len(plan)}"
+                f"  num：{len(plan)}"
             )
             break
 
-        print("  没有找到路径")
+        print("  no path")
 
     if selected_plan is not None:
         break
 
 
 # ============================================================
-# 执行采摘
+# gras
 # ============================================================
 
 if selected_plan is None:
     print()
     print("=" * 76)
-    print("所有候选的近抓取路径都失败。")
-    print("机械臂不会运动。")
+    print("all fail。")
     print("=" * 76)
 
 else:
     print()
     print("=" * 76)
-    print("选中候选：")
     print(
         f"  angle="
         f"{selected_candidate['angle']} deg"
@@ -589,8 +555,7 @@ else:
             4,
         ),
     )
-    print("3 秒后开始采摘。")
-    print("=" * 76)
+
 
     world.scene.add(
         VisualSphere(
@@ -605,7 +570,7 @@ else:
     )
 
     # --------------------------------------------------------
-    # 等待 3 秒
+    # wait for 3 s
     # --------------------------------------------------------
 
     for _ in range(180):
@@ -614,10 +579,10 @@ else:
         world.step(render=True)
 
     # --------------------------------------------------------
-    # 执行 RRT 到近抓取点
+    #  RRT to grasp piont
     # --------------------------------------------------------
 
-    print("PHASE 4：执行 RRT 路径")
+    print("PHASE 4： RRT route")
 
     for action_index, action in enumerate(
         selected_plan
@@ -641,11 +606,8 @@ else:
 
     near_grasp_arm_action = selected_plan[-1]
 
-    # --------------------------------------------------------
-    # 保持近抓取姿态并打开夹爪
-    # --------------------------------------------------------
 
-    print("PHASE 5：张开夹爪")
+    print("PHASE 5：open the girpper")
 
     hold_arm_action(
         arm_action=near_grasp_arm_action,
@@ -653,11 +615,8 @@ else:
         frames=90,
     )
 
-    # --------------------------------------------------------
-    # 从近抓取点直线接近草莓
-    # --------------------------------------------------------
 
-    print("PHASE 6：直线接近草莓")
+    print("PHASE 6：approch the target")
 
     approach_positions = np.linspace(
         selected_candidate["near_position"],
@@ -683,8 +642,8 @@ else:
 
         if not ik_success:
             print(
-                f"  IK 在接近点 "
-                f"{waypoint_index + 1} 失败"
+               
+                f"{waypoint_index + 1} fail"
             )
 
             approach_success = False
@@ -699,27 +658,27 @@ else:
         )
 
         print(
-            f"  接近 "
+            f"  approch "
             f"{waypoint_index + 1}/"
             f"{APPROACH_WAYPOINTS - 1}"
         )
 
     # --------------------------------------------------------
-    # 闭合、附着、撤回
+    # withdraw
     # --------------------------------------------------------
 
     if not approach_success:
         print()
         print("=" * 76)
-        print("最终接近失败，夹爪不会闭合。")
+        print("fail")
         print("=" * 76)
 
     else:
         grasp_arm_action = approach_actions[-1]
 
-        print("PHASE 7：闭合夹爪")
+        print("PHASE 7：close gripper")
 
-        # 从 0.04 缓慢闭合到 0.025
+       
         closing_steps = 60
 
         for step in range(closing_steps):
@@ -739,10 +698,10 @@ else:
                 frames=1,
             )
 
-        # 现在开始逻辑附着
+     
         update_attached_strawberry()
 
-        print("PHASE 8：草莓已附着，沿直线路径撤回")
+        print("PHASE 8：get the target")
 
         for reverse_index, action in enumerate(
             reversed(approach_actions)
@@ -755,47 +714,16 @@ else:
             )
 
             print(
-                f"  直线撤回 "
+    
                 f"{reverse_index + 1}/"
                 f"{len(approach_actions)}"
             )
 
-        print("PHASE 9：沿 RRT 路径返回安全位置")
-
-        reversed_rrt_plan = list(
-            reversed(selected_plan)
-        )
-
-        for action_index, action in enumerate(
-            reversed_rrt_plan
-        ):
-            hold_arm_action(
-                arm_action=action,
-                gripper_positions=GRIPPER_CLOSED,
-                frames=RRT_ACTION_HOLD_FRAMES,
-                carry_strawberry=True,
-            )
-
-            if (
-                action_index % 25 == 0
-                or action_index
-                == len(reversed_rrt_plan) - 1
-            ):
-                print(
-                    f"  返回 "
-                    f"{action_index + 1}/"
-                    f"{len(reversed_rrt_plan)}"
-                )
-
-        print()
-        print("=" * 76)
-        print("采摘完成：")
-        print("机械臂已经闭合夹爪、带走草莓并返回安全位置。")
-        print("=" * 76)
+        
 
 
 # ============================================================
-# 保持窗口开启
+# keep window open
 # ============================================================
 
 while simulation_app.is_running():
