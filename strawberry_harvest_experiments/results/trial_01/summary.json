@@ -1,0 +1,124 @@
+{
+  "scene_config": {
+    "fruit_radius": 0.03,
+    "fruit_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "plant_base_position": [
+      0.55,
+      0.0,
+      0.06
+    ],
+    "plant_base_scale": [
+      0.28,
+      0.28,
+      0.12
+    ],
+    "stem_position": [
+      0.55,
+      0.0,
+      0.29
+    ],
+    "stem_scale": [
+      0.025,
+      0.025,
+      0.36
+    ],
+    "leaf_0_scale": [
+      0.17,
+      0.06,
+      0.018
+    ],
+    "leaf_0_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_1_scale": [
+      0.16,
+      0.065,
+      0.016
+    ],
+    "leaf_1_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_2_enabled": false,
+    "leaf_2_position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_2_scale": [
+      0.16,
+      0.06,
+      0.016
+    ],
+    "leaf_2_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "neighbor_radius": 0.03,
+    "description": "baseline moderate occlusion",
+    "difficulty": "easy",
+    "purpose": "Reference success case with a centered target.",
+    "fruit_position": [
+      0.55,
+      0.0,
+      0.5
+    ],
+    "leaf_0_position": [
+      0.485,
+      0.025,
+      0.545
+    ],
+    "leaf_1_position": [
+      0.595,
+      -0.02,
+      0.54
+    ],
+    "neighbor_position": [
+      0.555,
+      -0.105,
+      0.49
+    ]
+  },
+  "result": {
+    "trial_id": 1,
+    "description": "baseline moderate occlusion",
+    "difficulty": "easy",
+    "fruit_position": "[0.55, 0.0, 0.5]",
+    "candidate_direction_count": 36,
+    "screened_safe_direction_count": 8,
+    "rrt_direction_count": 6,
+    "feasible_path_count": 30,
+    "selected_azimuth_deg": -90,
+    "selected_angle_deg": -90,
+    "selected_elevation_deg": 0,
+    "selected_seed": 99,
+    "selected_actions": 182,
+    "selected_joint_length": 3.366863,
+    "selected_estimated_grasp_time_s": 11.6,
+    "selected_planning_wall_time_s": 0.021483,
+    "actual_grasp_wall_time_s": 51.718102,
+    "planning_success": true,
+    "approach_success": true,
+    "grasp_closed_success": true,
+    "drop_planning_success": false,
+    "collision_detected": false,
+    "planning_failure": true,
+    "grasp_harvest_failure": false,
+    "harvest_success": false,
+    "failure_stage": "drop_planning",
+    "failure_reason": "No collision-free path to the drop zone.",
+    "total_wall_time_s": 139.72708
+  }
+}

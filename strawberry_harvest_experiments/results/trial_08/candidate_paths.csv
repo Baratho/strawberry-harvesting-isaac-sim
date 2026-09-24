@@ -1,0 +1,7 @@
+trial_id,description,rank,azimuth_deg,elevation_deg,approach_clearance_m,seed,actions,joint_length,estimated_rrt_time_s,estimated_approach_time_s,estimated_close_time_s,estimated_grasp_time_s,planning_wall_time_s,selected
+8,target upper half enclosed by two tilted leaves,1,0,30,0.009454,2026,285,4.144677,14.250000,1.500000,1.000000,16.750000,0.026424,True
+8,target upper half enclosed by two tilted leaves,2,0,30,0.009454,99,285,4.147969,14.250000,1.500000,1.000000,16.750000,0.025155,False
+8,target upper half enclosed by two tilted leaves,3,0,30,0.009454,7,285,4.148544,14.250000,1.500000,1.000000,16.750000,0.025512,False
+8,target upper half enclosed by two tilted leaves,4,0,30,0.009454,123456,300,3.776418,15.000000,1.500000,1.000000,17.500000,0.027004,False
+8,target upper half enclosed by two tilted leaves,5,0,30,0.009454,42,305,3.799025,15.250000,1.500000,1.000000,17.750000,0.025283,False
+8,target upper half enclosed by two tilted leaves,6,0,30,0.009454,314159,361,6.470386,18.050000,1.500000,1.000000,20.550000,0.034579,False

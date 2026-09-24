@@ -1,0 +1,156 @@
+from isaacsim import SimulatnApp，再导入其他 Isaac Sim 模块
+simulation_app = SimulationApp(
+    {
+        "headless": True,
+        "width": 640,
+        "height": 480,
+    }
+)
+
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+from isaacsim.core.api import World
+from isaacsim.core.api.objects import FixedCuboid
+from isaacsim.robot.manipulators.examples.franka import Franka
+from isaacsim.sensors.camera import Camera
+
+
+OUTPUT_DIR = Path(__file__).resolve().parent / "outputs"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+# ------------------------------------------------------------------
+# 1. 创建仿真世界
+# ------------------------------------------------------------------
+world = World(
+    stage_units_in_meters=1.0,
+    physics_dt=1.0 / 60.0,
+    rendering_dt=1.0 / 30.0,
+)
+
+world.scene.add_default_ground_plane()
+
+
+# ------------------------------------------------------------------
+# 2. 添加 Franka Panda
+# ------------------------------------------------------------------
+franka = world.scene.add(
+    Franka(
+        prim_path="/World/Franka",
+        name="franka",
+        position=np.array([0.0, 0.0, 0.0]),
+    )
+)
+
+
+# ------------------------------------------------------------------
+# 3. 创建简化草莓
+#
+# 第一阶段先使用红色方块验证完整场景。
+# 后面再将它换成椭球或真正的草莓模型。
+# ------------------------------------------------------------------
+strawberry = world.scene.add(
+    FixedCuboid(
+        prim_path="/World/Plant/Strawberry",
+        name="strawberry",
+        position=np.array([0.55, 0.0, 0.48]),
+        scale=np.array([0.07, 0.07, 0.09]),
+        color=np.array([1.0, 0.05, 0.05]),
+    )
+)
+
+
+# ------------------------------------------------------------------
+# 4. 添加果梗
+# ------------------------------------------------------------------
+stem = world.scene.add(
+    FixedCuboid(
+        prim_path="/World/Plant/Stem",
+        name="stem",
+        position=np.array([0.55, 0.0, 0.25]),
+        scale=np.array([0.025, 0.025, 0.45]),
+        color=np.array([0.1, 0.55, 0.1]),
+    )
+)
+
+
+# ------------------------------------------------------------------
+# 5. 添加两片叶子，形成部分遮挡
+# ------------------------------------------------------------------
+leaf_left = world.scene.add(
+    FixedCuboid(
+        prim_path="/World/Plant/LeafLeft",
+        name="leaf_left",
+        position=np.array([0.52, 0.09, 0.52]),
+        scale=np.array([0.20, 0.07, 0.015]),
+        color=np.array([0.05, 0.75, 0.1]),
+    )
+)
+
+leaf_right = world.scene.add(
+    FixedCuboid(
+        prim_path="/World/Plant/LeafRight",
+        name="leaf_right",
+        position=np.array([0.58, -0.09, 0.50]),
+        scale=np.array([0.18, 0.07, 0.015]),
+        color=np.array([0.05, 0.65, 0.1]),
+    )
+)
+
+
+# ------------------------------------------------------------------
+# 6. 添加俯视RGB相机
+#
+# USD相机默认沿局部-Z方向观察。
+# 单位四元数表示相机直接向世界坐标系-Z方向看。
+# ------------------------------------------------------------------
+camera = Camera(
+    prim_path="/World/RGBCamera",
+    position=np.array([0.40, 0.0, 1.8]),
+    orientation=np.array([1.0, 0.0, 0.0, 0.0]),
+    frequency=30,
+    resolution=(640, 480),
+)
+
+
+# ------------------------------------------------------------------
+# 7. 初始化并渲染
+# ------------------------------------------------------------------
+print("Resetting world...", flush=True)
+world.reset()
+
+print("Initializing camera...", flush=True)
+camera.initialize()
+
+# 多渲染一些帧，确保相机和材质完成初始化
+for frame_index in range(40):
+    world.step(render=True)
+
+    if frame_index % 10 == 0:
+        print(f"Rendered frame {frame_index}", flush=True)
+
+
+# ------------------------------------------------------------------
+# 8. 保存相机RGB图像
+# ------------------------------------------------------------------
+rgba = camera.get_rgba()
+
+if rgba is None or rgba.size == 0:
+    raise RuntimeError("Camera returned an empty image.")
+
+rgb = np.asarray(rgba[:, :, :3], dtype=np.uint8)
+image_path = OUTPUT_DIR / "scene_rgb.png"
+Image.fromarray(rgb).save(image_path)
+
+strawberry_position, _ = strawberry.get_world_pose()
+
+print(f"Scene image saved to: {image_path}", flush=True)
+print(
+    f"Ground-truth strawberry position: {strawberry_position}",
+    flush=True,
+)
+
+simulation_app.close()

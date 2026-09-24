@@ -1,0 +1,124 @@
+{
+  "scene_config": {
+    "fruit_radius": 0.03,
+    "fruit_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "plant_base_position": [
+      0.55,
+      0.0,
+      0.06
+    ],
+    "plant_base_scale": [
+      0.28,
+      0.28,
+      0.12
+    ],
+    "stem_position": [
+      0.55,
+      0.0,
+      0.29
+    ],
+    "stem_scale": [
+      0.025,
+      0.025,
+      0.36
+    ],
+    "leaf_0_scale": [
+      0.28,
+      0.28,
+      0.02
+    ],
+    "leaf_0_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_1_scale": [
+      0.2,
+      0.12,
+      0.016
+    ],
+    "leaf_1_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_2_enabled": false,
+    "leaf_2_position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_2_scale": [
+      0.16,
+      0.06,
+      0.016
+    ],
+    "leaf_2_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "neighbor_radius": 0.03,
+    "description": "dense overhead canopy failure challenge",
+    "difficulty": "failure challenge",
+    "purpose": "Provide a severe occlusion case for failure analysis.",
+    "fruit_position": [
+      0.55,
+      0.0,
+      0.47
+    ],
+    "leaf_0_position": [
+      0.55,
+      0.0,
+      0.51
+    ],
+    "leaf_1_position": [
+      0.575,
+      -0.03,
+      0.515
+    ],
+    "neighbor_position": [
+      0.505,
+      -0.055,
+      0.47
+    ]
+  },
+  "result": {
+    "trial_id": 10,
+    "description": "dense overhead canopy failure challenge",
+    "difficulty": "failure challenge",
+    "fruit_position": "[0.55, 0.0, 0.47]",
+    "candidate_direction_count": 36,
+    "screened_safe_direction_count": 4,
+    "rrt_direction_count": 4,
+    "feasible_path_count": 24,
+    "selected_azimuth_deg": -30,
+    "selected_angle_deg": -30,
+    "selected_elevation_deg": 0,
+    "selected_seed": 7,
+    "selected_actions": 210,
+    "selected_joint_length": 2.858631,
+    "selected_estimated_grasp_time_s": 13.0,
+    "selected_planning_wall_time_s": 0.02284,
+    "actual_grasp_wall_time_s": 60.140374,
+    "planning_success": true,
+    "approach_success": true,
+    "grasp_closed_success": false,
+    "drop_planning_success": false,
+    "collision_detected": false,
+    "planning_failure": false,
+    "grasp_harvest_failure": true,
+    "harvest_success": false,
+    "failure_stage": "grasp_pose",
+    "failure_reason": "The gripper did not reach the strawberry; fruit was not attached (position error=0.1307 m).",
+    "total_wall_time_s": 74.7756
+  }
+}

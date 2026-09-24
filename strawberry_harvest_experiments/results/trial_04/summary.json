@@ -1,0 +1,124 @@
+{
+  "scene_config": {
+    "fruit_radius": 0.03,
+    "fruit_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "plant_base_position": [
+      0.55,
+      0.0,
+      0.06
+    ],
+    "plant_base_scale": [
+      0.28,
+      0.28,
+      0.12
+    ],
+    "stem_position": [
+      0.55,
+      0.0,
+      0.29
+    ],
+    "stem_scale": [
+      0.025,
+      0.025,
+      0.36
+    ],
+    "leaf_0_scale": [
+      0.175,
+      0.07,
+      0.014
+    ],
+    "leaf_0_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_1_scale": [
+      0.165,
+      0.065,
+      0.014
+    ],
+    "leaf_1_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_2_enabled": false,
+    "leaf_2_position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_2_scale": [
+      0.16,
+      0.06,
+      0.016
+    ],
+    "leaf_2_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "neighbor_radius": 0.03,
+    "description": "target between upper and lower leaves with neighbor on left",
+    "difficulty": "moderate",
+    "purpose": "Test vertical obstacle arrangement and left-side neighbor clearance.",
+    "fruit_position": [
+      0.53,
+      0.02,
+      0.5
+    ],
+    "leaf_0_position": [
+      0.53,
+      0.02,
+      0.555
+    ],
+    "leaf_1_position": [
+      0.53,
+      0.02,
+      0.415
+    ],
+    "neighbor_position": [
+      0.445,
+      0.02,
+      0.5
+    ]
+  },
+  "result": {
+    "trial_id": 4,
+    "description": "target between upper and lower leaves with neighbor on left",
+    "difficulty": "moderate",
+    "fruit_position": "[0.53, 0.02, 0.5]",
+    "candidate_direction_count": 36,
+    "screened_safe_direction_count": 13,
+    "rrt_direction_count": 6,
+    "feasible_path_count": 36,
+    "selected_azimuth_deg": -60,
+    "selected_angle_deg": -60,
+    "selected_elevation_deg": 0,
+    "selected_seed": 99,
+    "selected_actions": 162,
+    "selected_joint_length": 2.487635,
+    "selected_estimated_grasp_time_s": 10.6,
+    "selected_planning_wall_time_s": 0.017917,
+    "actual_grasp_wall_time_s": 52.484517,
+    "planning_success": true,
+    "approach_success": true,
+    "grasp_closed_success": true,
+    "drop_planning_success": false,
+    "collision_detected": false,
+    "planning_failure": true,
+    "grasp_harvest_failure": false,
+    "harvest_success": false,
+    "failure_stage": "drop_planning",
+    "failure_reason": "No collision-free path to the drop zone.",
+    "total_wall_time_s": 74.560235
+  }
+}

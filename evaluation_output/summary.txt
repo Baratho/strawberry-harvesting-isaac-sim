@@ -1,0 +1,15 @@
+Strawberry Harvesting Evaluation Summary
+================================================
+Completed trials: 10
+Successful approaches: 1
+Planning failures: 6
+Collision count: 0
+Harvest successes: 1
+Harvest failures after planning: 3
+Average planning time: 1.0893 s
+Average execution time: 42.6948 s
+
+Collision metric limitation:
+The reported collision count is planner-level. The RRT path and final
+straight approach are screened before execution, but no physical contact
+sensor is used in this version.

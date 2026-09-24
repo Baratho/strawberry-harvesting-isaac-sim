@@ -1,0 +1,124 @@
+{
+  "scene_config": {
+    "fruit_radius": 0.03,
+    "fruit_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "plant_base_position": [
+      0.55,
+      0.0,
+      0.06
+    ],
+    "plant_base_scale": [
+      0.28,
+      0.28,
+      0.12
+    ],
+    "stem_position": [
+      0.55,
+      0.0,
+      0.29
+    ],
+    "stem_scale": [
+      0.025,
+      0.025,
+      0.36
+    ],
+    "leaf_0_scale": [
+      0.17,
+      0.06,
+      0.018
+    ],
+    "leaf_0_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_1_scale": [
+      0.16,
+      0.065,
+      0.016
+    ],
+    "leaf_1_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_2_enabled": false,
+    "leaf_2_position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_2_scale": [
+      0.16,
+      0.06,
+      0.016
+    ],
+    "leaf_2_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "neighbor_radius": 0.03,
+    "description": "neighbor blocks preferred minus-60-degree approach",
+    "difficulty": "very hard",
+    "purpose": "Test whether global comparison selects a different angle.",
+    "fruit_position": [
+      0.52,
+      0.03,
+      0.48
+    ],
+    "leaf_0_position": [
+      0.485,
+      0.025,
+      0.525
+    ],
+    "leaf_1_position": [
+      0.595,
+      -0.02,
+      0.53
+    ],
+    "neighbor_position": [
+      0.48,
+      0.085,
+      0.48
+    ]
+  },
+  "result": {
+    "trial_id": 9,
+    "description": "neighbor blocks preferred minus-60-degree approach",
+    "difficulty": "very hard",
+    "fruit_position": "[0.52, 0.03, 0.48]",
+    "candidate_direction_count": 36,
+    "screened_safe_direction_count": 7,
+    "rrt_direction_count": 6,
+    "feasible_path_count": 36,
+    "selected_azimuth_deg": 60,
+    "selected_angle_deg": 60,
+    "selected_elevation_deg": 30,
+    "selected_seed": 7,
+    "selected_actions": 166,
+    "selected_joint_length": 2.602094,
+    "selected_estimated_grasp_time_s": 10.8,
+    "selected_planning_wall_time_s": 0.019583,
+    "actual_grasp_wall_time_s": 48.595117,
+    "planning_success": true,
+    "approach_success": true,
+    "grasp_closed_success": true,
+    "drop_planning_success": true,
+    "collision_detected": false,
+    "planning_failure": false,
+    "grasp_harvest_failure": false,
+    "harvest_success": true,
+    "failure_stage": "",
+    "failure_reason": "",
+    "total_wall_time_s": 130.26261
+  }
+}

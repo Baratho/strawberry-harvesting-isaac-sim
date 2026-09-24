@@ -1,0 +1,11 @@
+trial_id,description,occlusion,target_x,target_y,target_z,candidate_count,geometric_clear_count,ik_reachable_count,blocked_candidate_count,rrt_attempt_count,selected_angle_deg,planning_success,approach_success,harvest_success,collision_count,planning_time_s,execution_time_s,pregrasp_position_error_m,final_position_error_m,failure_reason
+1,baseline moderate occlusion,moderate,0.55,0.0,0.5,12,5,2,7,2,60,1,0,0,0,5.7742,37.9081,0.02058,0.05136,grasp_position_error_0.051_m
+2,target left and slightly lower,light,0.52,0.03,0.48,12,12,7,0,2,30,1,0,0,0,4.8374,44.2517,0.00949,0.05957,grasp_position_error_0.060_m
+3,target right with front leaf,moderate,0.58,-0.04,0.52,12,0,0,12,0,,0,0,0,0,0.0017,0.0,,,no_collision_free_candidate
+4,negative-y target with clear left approach,light,0.54,-0.07,0.5,12,12,7,0,1,0,1,1,1,0,0.1861,49.1851,0.01625,0.0149,success
+5,positive-y target with neighboring fruit,moderate,0.56,0.08,0.51,12,1,0,11,0,,0,0,0,0,0.0088,0.0,,,no_collision_free_candidate
+6,high target,moderate,0.55,0.0,0.56,12,0,0,12,0,,0,0,0,0,0.0015,0.0,,,no_collision_free_candidate
+7,low target near plant,heavy,0.53,0.02,0.45,12,0,0,12,0,,0,0,0,0,0.0015,0.0,,,no_collision_free_candidate
+8,crowded neighbor on direct approach,heavy,0.59,0.02,0.5,12,4,1,8,1,60,1,0,0,0,0.0523,39.4343,0.02059,0.06312,grasp_position_error_0.063_m
+9,two leaves close to fruit,heavy,0.57,-0.02,0.49,12,0,0,12,0,,0,0,0,0,0.0015,0.0,,,no_collision_free_candidate
+10,intentionally unreachable target,failure_case,1.05,0.0,0.58,12,4,0,8,0,,0,0,0,0,0.0283,0.0,,,no_collision_free_candidate

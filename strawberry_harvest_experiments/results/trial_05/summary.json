@@ -1,0 +1,124 @@
+{
+  "scene_config": {
+    "fruit_radius": 0.03,
+    "fruit_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "plant_base_position": [
+      0.55,
+      0.0,
+      0.06
+    ],
+    "plant_base_scale": [
+      0.28,
+      0.28,
+      0.12
+    ],
+    "stem_position": [
+      0.55,
+      0.0,
+      0.29
+    ],
+    "stem_scale": [
+      0.025,
+      0.025,
+      0.36
+    ],
+    "leaf_0_scale": [
+      0.17,
+      0.06,
+      0.018
+    ],
+    "leaf_0_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_1_scale": [
+      0.16,
+      0.065,
+      0.016
+    ],
+    "leaf_1_orientation": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leaf_2_enabled": true,
+    "leaf_2_position": [
+      0.5,
+      0.075,
+      0.465
+    ],
+    "leaf_2_scale": [
+      0.17,
+      0.07,
+      0.016
+    ],
+    "leaf_2_orientation": [
+      0.953717,
+      0.300706,
+      0.0,
+      0.0
+    ],
+    "neighbor_radius": 0.03,
+    "description": "low target with an angled leaf on its left",
+    "difficulty": "moderate-hard",
+    "purpose": "Test low-height reachability with side-leaf occlusion.",
+    "fruit_position": [
+      0.53,
+      0.02,
+      0.43
+    ],
+    "leaf_0_position": [
+      0.48,
+      0.03,
+      0.48
+    ],
+    "leaf_1_position": [
+      0.6,
+      -0.02,
+      0.48
+    ],
+    "neighbor_position": [
+      0.56,
+      -0.105,
+      0.44
+    ]
+  },
+  "result": {
+    "trial_id": 5,
+    "description": "low target with an angled leaf on its left",
+    "difficulty": "moderate-hard",
+    "fruit_position": "[0.53, 0.02, 0.43]",
+    "candidate_direction_count": 36,
+    "screened_safe_direction_count": 8,
+    "rrt_direction_count": 6,
+    "feasible_path_count": 31,
+    "selected_azimuth_deg": -60,
+    "selected_angle_deg": -60,
+    "selected_elevation_deg": 30,
+    "selected_seed": 123456,
+    "selected_actions": 164,
+    "selected_joint_length": 2.646214,
+    "selected_estimated_grasp_time_s": 10.7,
+    "selected_planning_wall_time_s": 0.129556,
+    "actual_grasp_wall_time_s": 48.514584,
+    "planning_success": true,
+    "approach_success": true,
+    "grasp_closed_success": true,
+    "drop_planning_success": false,
+    "collision_detected": true,
+    "planning_failure": false,
+    "grasp_harvest_failure": false,
+    "harvest_success": false,
+    "failure_stage": "fruit_extraction",
+    "failure_reason": "start pose intersects leaf_2",
+    "total_wall_time_s": 113.061155
+  }
+}
